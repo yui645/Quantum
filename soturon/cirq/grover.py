@@ -27,7 +27,7 @@ Most common bitstring: 10
 Found a match: True
 
 """
-##
+
 import random
 import cirq
 import memory_profiler as MP
