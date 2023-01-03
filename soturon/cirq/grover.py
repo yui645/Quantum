@@ -31,6 +31,9 @@ Found a match: True
 import random
 import cirq
 import memory_profiler as MP
+import time
+
+time_sta = time.perf_counter()
 
 b1 = MP.memory_usage()[0]
 def set_io_qubits(qubit_count):
@@ -115,4 +118,9 @@ def main():
 if __name__ == '__main__':
     main()
 b2 = MP.memory_usage()[0]
+
+time_end = time.perf_counter()
+tim = time_end- time_sta
+
 print(b2-b1)
+print(tim)

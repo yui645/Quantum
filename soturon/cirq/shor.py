@@ -56,8 +56,12 @@ import time
 import sympy
 
 import cirq
+import memory_profiler as MP
+
+
 
 time_sta = time.perf_counter()
+b1 = MP.memory_usage()[0]
 parser = argparse.ArgumentParser(description='Factorization demo.')
 parser.add_argument('n', type = int, help='composite integer to factor')
 parser.add_argument(
@@ -346,8 +350,9 @@ if __name__ == '__main__':
     ORDER_FINDERS = {'naive': naive_order_finder, 'quantum': quantum_order_finder}
     args = parser.parse_args()
     main(n=args.n, order_finder=ORDER_FINDERS[args.order_finder])
-
+b2 = MP.memory_usage()[0]
 time_end = time.perf_counter()
 tim = time_end- time_sta
 
+print(b2-b1)
 print(tim)

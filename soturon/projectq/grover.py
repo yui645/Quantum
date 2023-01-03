@@ -7,7 +7,12 @@ import math
 from projectq import MainEngine
 from projectq.meta import Compute, Control, Loop, Uncompute
 from projectq.ops import All, H, Measure, X, Z
+import memory_profiler as MP
+import time
 
+time_sta = time.perf_counter()
+
+b1 = MP.memory_usage()[0]
 
 def run_grover(eng, n, oracle):
     """
@@ -84,3 +89,9 @@ if __name__ == "__main__":
     eng = MainEngine()  # use default compiler engine
     # run Grover search to find a 7-bit solution
     print(run_grover(eng, 7, alternating_bits_oracle))
+
+b2 = MP.memory_usage()[0]
+time_end = time.perf_counter()
+tim = time_end- time_sta
+print(b2-b1)
+print(tim)

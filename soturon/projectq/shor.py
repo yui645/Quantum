@@ -26,6 +26,12 @@ from projectq.cengines import (
 from projectq.libs.math import AddConstant, AddConstantModN, MultiplyByConstantModN
 from projectq.meta import Control
 from projectq.ops import QFT, All, BasicMathGate, H, Measure, R, Swap, X, get_inverse
+import memory_profiler as MP
+import time
+
+time_sta = time.perf_counter()
+
+b1 = MP.memory_usage()[0]
 
 
 def run_shor(eng, N, a, verbose=False):
@@ -152,3 +158,9 @@ if __name__ == "__main__":
             print(f"\n\n\t\033[91mBad luck: Found {f1} and {f2}\033[0m")
 
         print(resource_counter)  # print resource usage
+
+b2 = MP.memory_usage()[0]
+time_end = time.perf_counter()
+tim = time_end- time_sta
+print(b2-b1)
+print(tim)
