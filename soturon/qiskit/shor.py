@@ -5,6 +5,12 @@ from qiskit import IBMQ, Aer, assemble, transpile
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit.providers.ibmq import least_busy
 from qiskit.visualization import plot_histogram
+import memory_profiler as MP
+import time
+
+time_sta = time.perf_counter()
+
+b1 = MP.memory_usage()[0]
 
 def superposition (circuit, num_qubits):
     for i in range (num_qubits): 
@@ -107,3 +113,9 @@ while not factor_found:
                 print("*** Non-trivial factor found: %i ***" % guess)
                 factor_found = True
                 print("*** Non-trivial factors found: %s and %s ***" % (guess, N//guess)) 
+
+b2 = MP.memory_usage()[0]
+time_end = time.perf_counter()
+tim = time_end- time_sta
+print(b2-b1)
+print(tim)

@@ -4,6 +4,13 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit import IBMQ, Aer, transpile, assemble
 from qiskit.visualization import plot_histogram, plot_bloch_multivector, array_to_latex
 from qiskit.extensions import Initialize
+import memory_profiler as MP
+import time
+
+time_sta = time.perf_counter()
+
+b1 = MP.memory_usage()[0]
+
 def create_bell_pair(qc, a, b):
     """Creates a bell pair in qc using qubits a & b"""
     qc.h(a) # Put qubit a into state |+>
@@ -35,3 +42,9 @@ measure_and_send(teleportation_circuit, 0, 1)
 teleportation_circuit.barrier() # Use barrier to separate steps
 bob_gates(teleportation_circuit, 2, crz, crx)
 teleportation_circuit.draw()
+
+b2 = MP.memory_usage()[0]
+time_end = time.perf_counter()
+tim = time_end- time_sta
+print(b2-b1)
+print(tim)
