@@ -42,6 +42,7 @@ measure_and_send(teleportation_circuit, 0, 1)
 teleportation_circuit.barrier() # Use barrier to separate steps
 bob_gates(teleportation_circuit, 2, crz, crx)
 teleportation_circuit.draw()
+print(teleportation_circuit)
 
 b2 = MP.memory_usage()[0]
 time_end = time.perf_counter()
